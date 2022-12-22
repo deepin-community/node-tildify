@@ -1,0 +1,25 @@
+Source: node-tildify
+Maintainer: Debian Javascript Maintainers <pkg-javascript-devel@lists.alioth.debian.org>
+Uploaders: Pirate Praveen <praveen@debian.org>
+Section: javascript
+Testsuite: autopkgtest-pkg-nodejs
+Priority: optional
+Build-Depends:
+ debhelper-compat (= 12),
+ , node-tape <!nocheck>,
+ , pkg-js-tools (>= 0.9.19~)
+Standards-Version: 4.4.1
+Vcs-Browser: https://salsa.debian.org/js-team/node-tildify
+Vcs-Git: https://salsa.debian.org/js-team/node-tildify.git
+Homepage: https://github.com/sindresorhus/tildify#readme
+Rules-Requires-Root: no
+
+Package: node-tildify
+Architecture: all
+Depends:
+ ${misc:Depends},
+ , nodejs
+Description: Convert an absolute path to a tilde path
+ Example: `/Users/sindresorhus/dev` → `~/dev`
+ .
+ Node.js is an event-based server-side JavaScript engine.

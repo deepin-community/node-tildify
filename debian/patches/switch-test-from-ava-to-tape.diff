@@ -1,0 +1,48 @@
+Description: switch test from ava to tape
+Author: Xavier Guimard <yadd@debian.org>
+Forwarded: not-needed
+Last-Update: 2019-12-09
+
+--- a/test.js
++++ b/test.js
+@@ -1,7 +1,7 @@
+ 'use strict';
+ const path = require('path');
+ const os = require('os');
+-const test = require('ava');
++const test = require('tape');
+ const tildify = require('.');
+ 
+ const homeDirectory = os.homedir();
+@@ -9,6 +9,7 @@
+ test('tildify home', t => {
+ 	const fixture = homeDirectory;
+ 	t.is(tildify(fixture), '~');
++	t.end();
+ });
+ 
+ test('tildify path', t => {
+@@ -16,19 +17,23 @@
+ 	t.is(tildify(fixture)[0], '~');
+ 	t.true(tildify(fixture).endsWith('tildify'));
+ 	t.not(tildify(fixture), fixture);
++	t.end();
+ });
+ 
+ test('ensure only a fully matching path is replaced', t => {
+ 	const fixture = path.resolve(`${homeDirectory}foo`, 'tildify');
+ 	t.is(tildify(fixture), fixture);
++	t.end();
+ });
+ 
+ test('ignore relative paths', t => {
+ 	const fixture = 'tildify';
+ 	t.is(tildify(fixture), fixture);
++	t.end();
+ });
+ 
+ test('only tildify when home is at the start of a path', t => {
+ 	const fixture = path.join('tildify', homeDirectory);
+ 	t.is(tildify(fixture), fixture);
++	t.end();
+ });
